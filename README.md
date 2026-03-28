@@ -24,7 +24,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>pagehelper</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
     <exclusions>
         <exclusion>
             <groupId>com.github.jsqlparser</groupId>
@@ -35,7 +35,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>sqlparser4.5</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
 </dependency>
 ```
 
@@ -45,7 +45,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>pagehelper</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
     <exclusions>
         <exclusion>
             <groupId>com.github.jsqlparser</groupId>
@@ -56,7 +56,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>sqlparser4.7</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
 </dependency>
 ```
 
@@ -66,7 +66,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>pagehelper</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
     <exclusions>
         <exclusion>
             <groupId>com.github.jsqlparser</groupId>
@@ -77,7 +77,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>sqlparser4.9</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
 </dependency>
 <!-- 可选择 4.9 或 5.0 版本 -->
 <dependency>
@@ -93,7 +93,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>pagehelper</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
     <exclusions>
         <exclusion>
             <groupId>com.github.jsqlparser</groupId>
@@ -104,7 +104,7 @@
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>sqlparser5.1</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
 </dependency>
 <!-- 可选择 5.1、5.2 或 5.3 版本 -->
 <dependency>
@@ -159,7 +159,7 @@ return parser.Statement();
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>sqlparser-timeout</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
 </dependency>
 ```
 

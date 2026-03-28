@@ -6,10 +6,11 @@
     <parent>
         <groupId>com.github.pagehelper</groupId>
         <artifactId>pagehelper-sqlparser</artifactId>
-        <version>6.1.0</version>
+        <version>6.1.1</version>
     </parent>
 
     <artifactId>sqlparser-timeout</artifactId>
+    <name>sqlparser-timeout</name>
     <description>解析SQL支持超时控制，默认10秒，无法修改</description>
 
     <dependencies>

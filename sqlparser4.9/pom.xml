@@ -6,10 +6,11 @@
     <parent>
         <groupId>com.github.pagehelper</groupId>
         <artifactId>pagehelper-sqlparser</artifactId>
-        <version>6.1.0</version>
+        <version>6.1.1</version>
     </parent>
 
     <artifactId>sqlparser4.9</artifactId>
+    <name>sqlparser4.9</name>
 
     <dependencies>
         <dependency>
