@@ -14,8 +14,7 @@
 | 4.7 | sqlparser4.7 | 支持 JSqlParser 4.7（PageHelper 默认版本） |
 | 4.9 | sqlparser4.9 | 支持 JSqlParser 4.9 |
 | 5.0 | sqlparser4.9 | JSqlParser 5.0 与 4.9 API 兼容 |
-| 5.1 / 5.2 / 5.3（历史版本） | sqlparser5.1 | 历史发布的 `sqlparser5.1` 构件兼容 JSqlParser 5.1、5.2、5.3 |
-| 5.4（当前） | sqlparser5.1 | 当前 `sqlparser5.1` 模块基于 JSqlParser 5.4 编译并通过测试 |
+| 5.1 / 5.2 / 5.3 / 5.4 | sqlparser5.1 | 支持 JSqlParser 5.1、5.2、5.3、5.4（API 兼容） |
 
 ## Maven 依赖配置
 
@@ -88,9 +87,7 @@
 </dependency>
 ```
 
-### 使用 JSqlParser 5.4
-
-> 当前仓库中的 `sqlparser5.1` 模块已升级为基于 JSqlParser 5.4 构建。如需继续使用 JSqlParser 5.1、5.2 或 5.3，请使用升级前发布的 `sqlparser5.1` 构件。
+### 使用 JSqlParser 5.1 / 5.2 / 5.3 / 5.4
 
 ```xml
 <dependency>
@@ -109,7 +106,7 @@
     <artifactId>sqlparser5.1</artifactId>
     <version>6.1.1</version>
 </dependency>
-<!-- 使用 5.4 版本 -->
+<!-- 可选择 5.1、5.2、5.3 或 5.4 版本 -->
 <dependency>
     <groupId>com.github.jsqlparser</groupId>
     <artifactId>jsqlparser</artifactId>
@@ -128,14 +125,15 @@
   - Visitor 模式重构
   - 与 4.9 API 保持兼容，可使用 `sqlparser4.9` 模块
   
-- **5.1 / 5.2 / 5.3**:
+- **5.1**:
   - `OrderByElement` API 发生变化
   - `WithItem` 变为泛型类 `WithItem<?>`
   - `WithItem` 不再直接继承 `Select`（结构调整）
 
-- **5.4**:
-  - `ASTNodeAccessImpl#getASTNode()` 的返回类型由 `SimpleNode` 调整为 `Node`
-  - 当前 `sqlparser5.1` 模块已切换为基于 JSqlParser 5.4 编译并通过测试
+- **5.2 / 5.3 / 5.4**:
+  - API 与 5.1 保持兼容
+  - 主要是 Bug 修复和新功能
+  - 可使用同一个 `sqlparser5.1` 模块
 
 ## 高级配置
 
