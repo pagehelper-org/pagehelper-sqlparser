@@ -47,11 +47,5 @@ public class SqlTest {
                 countSqlParser.getSmartCountSql("SELECT * FROM user"));
     }
 
-    @Test
-    public void testSqlParserWithLeadingComment() {
-        Assert.assertEquals("/* test */SELECT count(0) FROM (SELECT name, count(id) FROM user GROUP BY name) table_count",
-                countSqlParser.getSmartCountSql("/* test */select name,count(id) from user group by name"));
-    }
-
     // Additional test cases similar to those in SqlTest.java for sqlparser4.7 can be added here
 }

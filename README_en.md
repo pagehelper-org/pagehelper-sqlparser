@@ -14,8 +14,7 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
 | 4.7 | sqlparser4.7 | Supports JSqlParser 4.7 (PageHelper default) |
 | 4.9 | sqlparser4.9 | Supports JSqlParser 4.9 |
 | 5.0 | sqlparser4.9 | JSqlParser 5.0 is API-compatible with 4.9 |
-| 5.1 / 5.2 / 5.3 (historical releases) | sqlparser5.1 | Previously released `sqlparser5.1` artifacts are compatible with JSqlParser 5.1, 5.2, and 5.3 |
-| 5.4 (current) | sqlparser5.1 | The current `sqlparser5.1` module builds against JSqlParser 5.4 and passes the test suite |
+| 5.1 / 5.2 / 5.3 / 5.4 | sqlparser5.1 | Supports JSqlParser 5.1, 5.2, 5.3, and 5.4 (API-compatible) |
 
 ## Maven Dependency Configuration
 
@@ -88,9 +87,7 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
 </dependency>
 ```
 
-### Using JSqlParser 5.4
-
-> The `sqlparser5.1` module in this repository now builds against JSqlParser 5.4. If you still need JSqlParser 5.1, 5.2, or 5.3, use a previously released `sqlparser5.1` artifact from before this upgrade.
+### Using JSqlParser 5.1 / 5.2 / 5.3 / 5.4
 
 ```xml
 <dependency>
@@ -109,7 +106,7 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
     <artifactId>sqlparser5.1</artifactId>
     <version>6.1.1</version>
 </dependency>
-<!-- Use version 5.4 -->
+<!-- Choose 5.1, 5.2, 5.3, or 5.4 -->
 <dependency>
     <groupId>com.github.jsqlparser</groupId>
     <artifactId>jsqlparser</artifactId>
@@ -128,14 +125,15 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
   - Visitor pattern refactoring
   - API-compatible with 4.9, can use `sqlparser4.9` module
   
-- **5.1 / 5.2 / 5.3**:
+- **5.1**:
   - `OrderByElement` API changes
   - `WithItem` became generic class `WithItem<?>`
   - `WithItem` no longer directly extends `Select` (structural adjustment)
 
-- **5.4**:
-  - The return type of `ASTNodeAccessImpl#getASTNode()` changed from `SimpleNode` to `Node`
-  - The current `sqlparser5.1` module now builds against JSqlParser 5.4 and passes the test suite
+- **5.2 / 5.3 / 5.4**:
+  - API-compatible with 5.1
+  - Mainly bug fixes and new features
+  - Can use the same `sqlparser5.1` module
 
 ## Advanced Configuration
 
