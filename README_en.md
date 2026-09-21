@@ -14,7 +14,8 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
 | 4.7 | sqlparser4.7 | Supports JSqlParser 4.7 (PageHelper default) |
 | 4.9 | sqlparser4.9 | Supports JSqlParser 4.9 |
 | 5.0 | sqlparser4.9 | JSqlParser 5.0 is API-compatible with 4.9 |
-| 5.4 | sqlparser5.1 | Supports JSqlParser 5.4 |
+| 5.1 / 5.2 / 5.3 (historical releases) | sqlparser5.1 | Previously released `sqlparser5.1` artifacts are compatible with JSqlParser 5.1, 5.2, and 5.3 |
+| 5.4 (current) | sqlparser5.1 | The current `sqlparser5.1` module builds against JSqlParser 5.4 and passes the test suite |
 
 ## Maven Dependency Configuration
 
@@ -88,6 +89,8 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
 ```
 
 ### Using JSqlParser 5.4
+
+> The `sqlparser5.1` module in this repository now builds against JSqlParser 5.4. If you still need JSqlParser 5.1, 5.2, or 5.3, use a previously released `sqlparser5.1` artifact from before this upgrade.
 
 ```xml
 <dependency>

@@ -14,7 +14,8 @@
 | 4.7 | sqlparser4.7 | 支持 JSqlParser 4.7（PageHelper 默认版本） |
 | 4.9 | sqlparser4.9 | 支持 JSqlParser 4.9 |
 | 5.0 | sqlparser4.9 | JSqlParser 5.0 与 4.9 API 兼容 |
-| 5.4 | sqlparser5.1 | 支持 JSqlParser 5.4 |
+| 5.1 / 5.2 / 5.3（历史版本） | sqlparser5.1 | 历史发布的 `sqlparser5.1` 构件兼容 JSqlParser 5.1、5.2、5.3 |
+| 5.4（当前） | sqlparser5.1 | 当前 `sqlparser5.1` 模块基于 JSqlParser 5.4 编译并通过测试 |
 
 ## Maven 依赖配置
 
@@ -88,6 +89,8 @@
 ```
 
 ### 使用 JSqlParser 5.4
+
+> 当前仓库中的 `sqlparser5.1` 模块已升级为基于 JSqlParser 5.4 构建。如需继续使用 JSqlParser 5.1、5.2 或 5.3，请使用升级前发布的 `sqlparser5.1` 构件。
 
 ```xml
 <dependency>
