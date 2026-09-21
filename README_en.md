@@ -14,7 +14,7 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
 | 4.7 | sqlparser4.7 | Supports JSqlParser 4.7 (PageHelper default) |
 | 4.9 | sqlparser4.9 | Supports JSqlParser 4.9 |
 | 5.0 | sqlparser4.9 | JSqlParser 5.0 is API-compatible with 4.9 |
-| 5.1 / 5.2 / 5.3 | sqlparser5.1 | Supports JSqlParser 5.1, 5.2, 5.3 (API-compatible) |
+| 5.4 | sqlparser5.1 | Supports JSqlParser 5.4 |
 
 ## Maven Dependency Configuration
 
@@ -87,7 +87,7 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
 </dependency>
 ```
 
-### Using JSqlParser 5.1 / 5.2 / 5.3
+### Using JSqlParser 5.4
 
 ```xml
 <dependency>
@@ -106,11 +106,11 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
     <artifactId>sqlparser5.1</artifactId>
     <version>6.1.1</version>
 </dependency>
-<!-- Choose 5.1, 5.2, or 5.3 -->
+<!-- Use version 5.4 -->
 <dependency>
     <groupId>com.github.jsqlparser</groupId>
     <artifactId>jsqlparser</artifactId>
-    <version>5.3</version> <!-- or 5.1, 5.2 -->
+    <version>5.4</version>
 </dependency>
 ```
 
@@ -125,15 +125,14 @@ To ensure compatibility with multiple versions of JSqlParser (4.5, 4.7, 4.9, 5.x
   - Visitor pattern refactoring
   - API-compatible with 4.9, can use `sqlparser4.9` module
   
-- **5.1**: 
+- **5.1 / 5.2 / 5.3**:
   - `OrderByElement` API changes
   - `WithItem` became generic class `WithItem<?>`
   - `WithItem` no longer directly extends `Select` (structural adjustment)
-  
-- **5.2 / 5.3**: 
-  - API-compatible with 5.1
-  - Mainly bug fixes and new features
-  - Can use the same `sqlparser5.1` module
+
+- **5.4**:
+  - The return type of `ASTNodeAccessImpl#getASTNode()` changed from `SimpleNode` to `Node`
+  - The current `sqlparser5.1` module now builds against JSqlParser 5.4 and passes the test suite
 
 ## Advanced Configuration
 
