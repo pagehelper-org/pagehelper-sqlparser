@@ -121,11 +121,11 @@ public class CountJSqlParser51 implements CountSqlParser {
         } catch (NoSuchMethodException e) {
             return null;
         } catch (InvocationTargetException e) {
-            Throwable cause = e.getCause();
-            if (cause instanceof RuntimeException) {
-                throw (RuntimeException) cause;
+            Throwable rootCause = e.getCause() == null ? e : e.getCause();
+            if (rootCause instanceof RuntimeException) {
+                throw (RuntimeException) rootCause;
             }
-            throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), cause);
+            throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), rootCause);
         } catch (ReflectiveOperationException e) {
             throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), e);
         }
