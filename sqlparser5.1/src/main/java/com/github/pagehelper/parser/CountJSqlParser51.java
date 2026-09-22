@@ -34,6 +34,8 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.select.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -88,7 +90,7 @@ public class CountJSqlParser51 implements CountSqlParser {
         Select countSelect = sqlToCount(select, countColumn);
         String result = countSelect.toString();
         if (select instanceof PlainSelect) {
-            Token token = select.getASTNode().jjtGetFirstToken().specialToken;
+            Token token = getSpecialToken(select);
             if (token != null) {
                 String hints = token.toString().trim();
                 // 这里判断是否存在hint, 且result是不包含hint的
@@ -98,6 +100,35 @@ public class CountJSqlParser51 implements CountSqlParser {
             }
         }
         return result;
+    }
+
+    protected Token getSpecialToken(Select select) {
+        Object astNode = invokeNoArgsMethod(select, "getASTNode");
+        if (astNode == null) {
+            return null;
+        }
+        Object firstToken = invokeNoArgsMethod(astNode, "jjtGetFirstToken");
+        if (firstToken instanceof Token) {
+            return ((Token) firstToken).specialToken;
+        }
+        return null;
+    }
+
+    protected Object invokeNoArgsMethod(Object target, String methodName) {
+        try {
+            Method method = target.getClass().getMethod(methodName);
+            return method.invoke(target);
+        } catch (NoSuchMethodException e) {
+            return null;
+        } catch (InvocationTargetException e) {
+            Throwable rootCause = e.getCause() == null ? e : e.getCause();
+            if (rootCause instanceof RuntimeException) {
+                throw (RuntimeException) rootCause;
+            }
+            throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), rootCause);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), e);
+        }
     }
 
     /**

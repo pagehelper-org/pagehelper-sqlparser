@@ -33,6 +33,12 @@ import net.sf.jsqlparser.statement.select.Select;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Test cases for CountJSqlParser51, adapted from SqlTest.java for sqlparser4.7.
  */
@@ -47,5 +53,70 @@ public class SqlTest {
                 countSqlParser.getSmartCountSql("SELECT * FROM user"));
     }
 
-    // Additional test cases similar to those in SqlTest.java for sqlparser4.7 can be added here
+    @Test
+    public void testSmartCountSqlKeepsHintComment() {
+        String countSql = countSqlParser.getSmartCountSql("/*+ INDEX(user idx_user_name) */ SELECT * FROM user");
+        Assert.assertTrue(countSql.startsWith("/*+ INDEX(user idx_user_name) */"));
+        Assert.assertTrue(countSql.toUpperCase().contains("COUNT(0)"));
+    }
+
+    @Test
+    public void testCountParserBytecodeDoesNotReferenceSimpleNode() throws IOException {
+        try (InputStream inputStream = CountJSqlParser51.class.getResourceAsStream("CountJSqlParser51.class")) {
+            Assert.assertNotNull(inputStream);
+            Set<String> constants = readConstantPoolUtf8(inputStream);
+            Assert.assertFalse(constants.contains("net/sf/jsqlparser/parser/SimpleNode"));
+        }
+    }
+
+    private Set<String> readConstantPoolUtf8(InputStream inputStream) throws IOException {
+        DataInputStream classStream = new DataInputStream(inputStream);
+        if (classStream.readInt() != 0xCAFEBABE) {
+            throw new IllegalArgumentException("Invalid class file");
+        }
+        classStream.readUnsignedShort(); // minor version
+        classStream.readUnsignedShort(); // major version
+        int constantPoolCount = classStream.readUnsignedShort();
+        Set<String> utf8Constants = new HashSet<>();
+        for (int i = 1; i < constantPoolCount; i++) {
+            int tag = classStream.readUnsignedByte();
+            switch (tag) {
+                case 1:
+                    utf8Constants.add(classStream.readUTF());
+                    break;
+                case 3:
+                case 4:
+                    classStream.readInt();
+                    break;
+                case 5:
+                case 6:
+                    classStream.readLong();
+                    i++;
+                    break;
+                case 7:
+                case 8:
+                case 16:
+                case 19:
+                case 20:
+                    classStream.readUnsignedShort();
+                    break;
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 17:
+                case 18:
+                    classStream.readUnsignedShort();
+                    classStream.readUnsignedShort();
+                    break;
+                case 15:
+                    classStream.readUnsignedByte();
+                    classStream.readUnsignedShort();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported constant pool tag: " + tag);
+            }
+        }
+        return utf8Constants;
+    }
 }
