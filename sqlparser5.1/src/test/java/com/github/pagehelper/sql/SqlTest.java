@@ -33,6 +33,10 @@ import net.sf.jsqlparser.statement.select.Select;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Test cases for CountJSqlParser51, adapted from SqlTest.java for sqlparser4.7.
  */
@@ -47,5 +51,19 @@ public class SqlTest {
                 countSqlParser.getSmartCountSql("SELECT * FROM user"));
     }
 
-    // Additional test cases similar to those in SqlTest.java for sqlparser4.7 can be added here
+    @Test
+    public void testSmartCountSqlKeepsHintComment() {
+        String countSql = countSqlParser.getSmartCountSql("/*+ INDEX(user idx_user_name) */ SELECT * FROM user");
+        Assert.assertTrue(countSql.startsWith("/*+ INDEX(user idx_user_name) */"));
+        Assert.assertTrue(countSql.toUpperCase().contains("COUNT(0)"));
+    }
+
+    @Test
+    public void testCountParserBytecodeDoesNotReferenceSimpleNode() throws IOException {
+        try (InputStream inputStream = CountJSqlParser51.class.getResourceAsStream("CountJSqlParser51.class")) {
+            Assert.assertNotNull(inputStream);
+            String classContent = new String(inputStream.readAllBytes(), StandardCharsets.ISO_8859_1);
+            Assert.assertFalse(classContent.contains("net/sf/jsqlparser/parser/SimpleNode"));
+        }
+    }
 }
