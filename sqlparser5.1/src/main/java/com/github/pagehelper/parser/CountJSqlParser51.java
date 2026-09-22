@@ -117,8 +117,10 @@ public class CountJSqlParser51 implements CountSqlParser {
         try {
             Method method = target.getClass().getMethod(methodName);
             return method.invoke(target);
-        } catch (ReflectiveOperationException e) {
+        } catch (NoSuchMethodException e) {
             return null;
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), e);
         }
     }
 
