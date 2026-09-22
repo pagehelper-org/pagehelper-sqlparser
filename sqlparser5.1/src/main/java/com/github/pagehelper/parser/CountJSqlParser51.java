@@ -34,6 +34,7 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.select.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -119,6 +120,12 @@ public class CountJSqlParser51 implements CountSqlParser {
             return method.invoke(target);
         } catch (NoSuchMethodException e) {
             return null;
+        } catch (InvocationTargetException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            }
+            throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), cause);
         } catch (ReflectiveOperationException e) {
             throw new IllegalStateException("Failed to invoke method '" + methodName + "' on " + target.getClass().getName(), e);
         }
